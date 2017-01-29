@@ -11,6 +11,11 @@ Package.onUse(function onUse(api) {
   api.versionsFrom('1.4.2.2');
 
   api.use([
+    'check',
     'ecmascript',
+    'matb33:collection-hooks@0.8.4',
+    'mongo',
   ]);
+
+  api.mainModule('behaviour.js', ['client', 'server']);
 });
