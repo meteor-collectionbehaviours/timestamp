@@ -1,0 +1,17 @@
+{
+  "author": "Simon Fridlund <simon@fridlund.email>",
+  "bugs": {
+    "url": "https://github.com/meteor-collectionbehaviours/timestmap/issues"
+  },
+  "description": "Automatically timestamp documents in your collections",
+  "homepage": "https://github.com/meteor-collectionbehaviours/timestamp#readme",
+  "license": "MIT",
+  "main": "package.js",
+  "name": "meteor-collectionbehaviours-timestamp",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteor-collectionbehaviours/timestamp.git"
+  },
+  "version": "1.0.0-alpha.1"
+}
