@@ -17,5 +17,5 @@ Package.onUse(function onUse(api) {
     'mongo',
   ]);
 
-  api.mainModule('behaviour.js', ['client', 'server']);
+  api.mainModule('behaviour.js', ['client', 'server'], { lazy: true });
 });
