@@ -1,5 +1,7 @@
 # collectionbehaviours:timestamp
 
+Automatically timestamp documents in your collections
+
 ## Install
 
 ```sh
