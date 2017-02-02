@@ -1,5 +1,5 @@
 // @flow
-import { check } from 'meteor/check';
+import { check, test } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
@@ -12,7 +12,13 @@ const defaults = {
   updatedBy: 'updatedBy',
 };
 
-export default function behaviour({ collection, options = {} }) {
+export default function behaviour(args) {
+  if (test(args, Mongo.Collection)) {
+    args.collection = args;
+  }
+
+  const { collection, options = {} } = args;
+
   check(collection, Mongo.Collection);
   check(options, Object);
 
