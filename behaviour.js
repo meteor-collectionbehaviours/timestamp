@@ -12,12 +12,14 @@ const defaults = {
   updatedBy: 'updatedBy',
 };
 
-export default function behaviour(args) {
-  if (test(args, Mongo.Collection)) {
-    args.collection = args;
+export default function behaviour(argument = {}) {
+  if (test(argument, Mongo.Collection)) {
+    argument = {
+      collection: argument
+    };
   }
 
-  const { collection, options = {} } = args;
+  const { collection, options = {} } = argument;
 
   check(collection, Mongo.Collection);
   check(options, Object);
