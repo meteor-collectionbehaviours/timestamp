@@ -2,6 +2,7 @@
 import { check, test } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import TimestampError from './error';
 
 const defaults = {
   createdAt: 'createdAt',
@@ -11,6 +12,8 @@ const defaults = {
   updatedAt: 'updatedAt',
   updatedBy: 'updatedBy',
 };
+
+const symbol = Symbol('collectionbehaviours:timestamp');
 
 export default function behaviour(argument = {}) {
   if (test(argument, Mongo.Collection)) {
@@ -23,6 +26,10 @@ export default function behaviour(argument = {}) {
 
   check(collection, Mongo.Collection);
   check(options, Object);
+
+  if (collection[symbol]) {
+    throw new TimestampError('The timestamp behaviour has already been added to this collection.');
+  }
 
   const {
     createdAt,
@@ -73,10 +80,13 @@ export default function behaviour(argument = {}) {
     }
   });
 
+  collection[symbol] = true;
+
   const handle = {
     remove() {
       beforeInsertHandle.remove();
       beforeUpdateHandle.remove();
+      delete collection[symbol];
     },
   };
 
