@@ -18,7 +18,7 @@ const symbol = Symbol('collectionbehaviours:timestamp');
 export default function behaviour(argument = {}) {
   if (Match.test(argument, Mongo.Collection)) {
     argument = {
-      collection: argument
+      collection: argument,
     };
   }
 
