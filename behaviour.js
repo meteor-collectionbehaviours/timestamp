@@ -1,5 +1,5 @@
 // @flow
-import { check, test } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import TimestampError from './error';
@@ -16,7 +16,7 @@ const defaults = {
 const symbol = Symbol('collectionbehaviours:timestamp');
 
 export default function behaviour(argument = {}) {
-  if (test(argument, Mongo.Collection)) {
+  if (Match.test(argument, Mongo.Collection)) {
     argument = {
       collection: argument
     };
