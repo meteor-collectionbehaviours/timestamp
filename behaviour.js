@@ -28,7 +28,8 @@ export default function behaviour(argument = {}) {
   check(options, Object);
 
   if (collection[symbol]) {
-    throw new TimestampError('The timestamp behaviour has already been added to this collection.');
+    const message = 'The timestamp behaviour has already been added to this collection.';
+    throw new TimestampError(message);
   }
 
   const {
