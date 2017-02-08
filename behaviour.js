@@ -51,10 +51,7 @@ export default function behaviour(argument = {}) {
   check(updatedAt, String);
   check(updatedBy, String);
 
-  const beforeInsertHandle = collection.before.insert(function timestampBeforeInsert(
-    userId = systemId,
-    doc,
-  ) {
+  function beforeInsertHook(userId = systemId, doc) {
     if (createdAt && (doc[createdAt] == null || (doc[createdAt] && Meteor.isServer && !insecure))) {
       doc[createdAt] = new Date();
     }
@@ -62,14 +59,11 @@ export default function behaviour(argument = {}) {
     if (createdBy && (doc[createdBy] == null || (doc[createdBy] && Meteor.isServer && !insecure))) {
       doc[createdBy] = userId;
     }
-  });
+  }
 
-  const beforeUpdateHandle = collection.before.update(function timestampBeforeUpdate(
-    userId = systemId,
-    doc,
-    fieldNames,
-    modifier,
-  ) {
+  const beforeInsertHandle = collection.before.insert(beforeInsertHook);
+
+  function beforeUpdateHook(userId = systemId, doc, fieldNames, modifier) {
     const { $set = {} } = modifier;
 
     if (updatedAt && ($set[updatedAt] == null || ($set[updatedAt] && Meteor.isServer && !insecure))) {
@@ -79,7 +73,9 @@ export default function behaviour(argument = {}) {
     if (updatedBy && ($set[updatedBy] == null || ($set[updatedBy] && Meteor.isServer && !insecure))) {
       $set[updatedBy] = userId;
     }
-  });
+  }
+
+  const beforeUpdateHandle = collection.before.update(beforeUpdateHook);
 
   collection[symbol] = true;
 
