@@ -70,18 +70,40 @@ export default function behaviour(argument = {}) {
       return;
     }
 
-    const { $set = {} } = modifier;
+    const isDocument = !Object.keys(modifier).find(key => key.startsWith('$'));
 
-    if (updatedAt && ($set[updatedAt] == null || ($set[updatedAt] && Meteor.isServer && !insecure))) {
-      $set[updatedAt] = new Date();
-    }
+    if (isDocument) {
+      if (createdAt && (modifier[createdAt] == null || (modifier[createdAt] && Meteor.isServer && !insecure))) {
+        modifier[createdAt] = new Date();
+      }
 
-    if (updatedBy && ($set[updatedBy] == null || ($set[updatedBy] && Meteor.isServer && !insecure))) {
-      $set[updatedBy] = userId;
+      if (createdBy && (modifier[createdBy] == null || (modifier[createdBy] && Meteor.isServer && !insecure))) {
+        modifier[createdBy] = userId;
+      }
+    } else {
+      const { $set = {} } = modifier;
+
+      if (updatedAt && ($set[updatedAt] == null || ($set[updatedAt] && Meteor.isServer && !insecure))) {
+        $set[updatedAt] = new Date();
+      }
+
+      if (updatedBy && ($set[updatedBy] == null || ($set[updatedBy] && Meteor.isServer && !insecure))) {
+        $set[updatedBy] = userId;
+      }
+
+      if (!Object.keys($set).length) {
+        delete modifier.$set;
+      }
     }
   }
 
   const beforeUpdateHandle = collection.before.update(beforeUpdateHook);
+
+    }
+
+    }
+  }
+
 
   collection[symbol] = true;
 
