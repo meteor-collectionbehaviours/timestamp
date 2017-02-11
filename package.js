@@ -4,7 +4,7 @@ Package.describe({
   git: 'git+https://github.com/meteor-collectionbehaviours/timestamp.git',
   name: 'collectionbehaviours:timestamp',
   summary: 'Automatically timestamp documents in your collections',
-  version: '1.0.0-alpha.2',
+  version: '1.0.0-alpha.3',
 });
 
 Package.onUse(function onUse(api) {
