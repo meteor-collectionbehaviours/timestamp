@@ -28,7 +28,9 @@ export default function behaviour(argument = {}) {
   check(options, Object);
 
   if (collection[symbol]) {
-    const message = 'The timestamp behaviour has already been added to this collection.';
+    // eslint-disable-next-line no-underscore-dangle
+    const collectionName = collection._name ? ` (${collection._name})` : '';
+    const message = `The timestamp behaviour has already been added to this collection${collectionName}.`;
     throw new TimestampError(message);
   }
 
