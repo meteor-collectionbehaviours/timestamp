@@ -8,7 +8,7 @@ blaze-tools@1.0.10
 boilerplate-generator@1.0.11
 callback-hook@1.0.10
 check@1.2.4
-collectionbehaviours:timestamp@1.0.0-alpha.1
+collectionbehaviours:timestamp@1.0.0-alpha.3
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.8
