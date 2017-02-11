@@ -66,6 +66,10 @@ export default function behaviour(argument = {}) {
   const beforeInsertHandle = collection.before.insert(beforeInsertHook);
 
   function beforeUpdateHook(userId = systemId, doc, fieldNames, modifier) {
+    if (!modifier) {
+      return;
+    }
+
     const { $set = {} } = modifier;
 
     if (updatedAt && ($set[updatedAt] == null || ($set[updatedAt] && Meteor.isServer && !insecure))) {
